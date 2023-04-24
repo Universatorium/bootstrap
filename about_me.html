@@ -5,17 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
     
   <style>
     .bg{
       background-color: bisque;
       margin: 2em;
     }
+    .custom-popover {
+  --bs-popover-max-width: 200px;
+  --bs-popover-border-color: var(black);
+  --bs-popover-header-bg: var(--bs-white);
+  --bs-popover-header-color: var(--bs-black);
+  --bs-popover-body-padding-x: 1rem;
+  --bs-popover-body-padding-y: .5rem;
+}
   </style>
 
   </head>
   <body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     <div class="container">
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
           <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
@@ -25,8 +34,8 @@
     
           <ul class="nav nav-pills">
             <li class="nav-item"><a href="index.html" class="btn btn-outline-secondary btn-lg px-4" aria-current="page">Home</a></li>
-            <!-- <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
+            <!-- <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
             <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li> -->
             <li class="nav-item"><a href="impressum.html" class="nav-link">Impressum</a></li>
           </ul>
@@ -45,7 +54,7 @@
               <div class="carousel-caption text-start">
                 <h1>Zertifikate.</h1>
                 <p>Alles, was ein Herrscher des Universums so braucht.</p>
-                <p><a class="btn btn-lg btn-primary autoplay" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Zertifikate</a></p>
+                <p><a class="btn btn-lg btn-secondary autoplay" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Zertifikate</a></p>
               </div>
             </div>
           </div>
@@ -55,7 +64,7 @@
               <div class="carousel-caption">
                 <h1>Hobbies.</h1>
                 <p>was ich so in meiner Freizeit mache.</p>
-                <p><a class="btn btn-lg btn-primary" href="https://www.youtube.com/watch?v=r4kPfUBy19E">Neugierig?</a></p>
+                <p><a class="btn btn-lg btn-secondary" href="https://www.youtube.com/watch?v=r4kPfUBy19E">Neugierig?</a></p>
               </div>
             </div>
           </div>
@@ -65,7 +74,7 @@
               <div class="carousel-caption text-end">
                 <h1>meine Haustiere.</h1>
                 <p>sind sie nicht süß?.</p>
-                <p><a class="btn btn-lg btn-primary" href="https://www.youtube.com/watch?v=vpOWk3EpjnY">bitte nicht füttern!</a></p>
+                <p><a class="btn btn-lg btn-outline-danger" href="https://www.youtube.com/watch?v=vpOWk3EpjnY">bitte nicht füttern!</a></p>
               </div>
             </div>
           </div>
@@ -83,8 +92,15 @@
         <div class="col-lg-4 ">
           <!-- <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="90%" height="90%" fill="var(--bs-secondary-color)"/></svg> -->
           <h2 class="fw-normal">Zertifikate</h2>
-          <p><img src="img/no-donkeys.gif" alt=""></p>
-          <p><a class="btn btn-secondary" href="img/no-donkeys.gif">View details &raquo;</a></p>
+          <p><img src="img/no-donkeys.gif" alt="Esel"></p>
+          <button type="button" class="btn btn-secondary"
+              data-bs-toggle="popover" data-bs-placement="right"
+              data-bs-custom-class="custom-popover bg"
+              data-bs-title="Zertifikate"
+              data-bs-content="Weitere Inhalte folgen sobald mir was Passendes einfällt.">
+    Details
+          </button>
+          <!-- <p><a class="btn btn-secondary" href="img/no-donkeys.gif">View details &raquo;</a></p> -->
         </div>
         <div class="col-lg-4">
           <h2 class="fw-normal">Hobbies</h2>
@@ -98,6 +114,20 @@
           <p><a class="btn btn-secondary" href="img/lightsaber.gif">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
+      <script>
+        // Den Button auswählen
+        var myPopover = document.querySelector('[data-bs-toggle="popover"]');
+    
+        // Das Popover initialisieren
+        var popover = new bootstrap.Popover(myPopover, {
+            customClass: myPopover.getAttribute('data-bs-custom-class'),
+            title: myPopover.getAttribute('data-bs-title'),
+            content: myPopover.getAttribute('data-bs-content'),
+            placement: myPopover.getAttribute('data-bs-placement')
+        });
+    </script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+      
     </body>
     <div class="container">
         <footer class="py-3 my-4">
